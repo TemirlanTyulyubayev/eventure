@@ -1,4 +1,4 @@
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, field_validator
 from datetime import datetime
 from typing import Optional
 
@@ -13,6 +13,14 @@ class EventBase(BaseModel):
     start_time: datetime
     end_time: datetime
     status: EventStatus = EventStatus.PLANNING
+
+    @field_validator('end_time')
+    @classmethod
+    def validate_end_time(cls, v: datetime, info) -> datetime:
+        """Validate that end_time is after start_time"""
+        if 'start_time' in info.data and v <= info.data['start_time']:
+            raise ValueError('End time must be after start time')
+        return v
 
 
 class EventCreate(EventBase):

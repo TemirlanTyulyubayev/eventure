@@ -72,7 +72,9 @@ class EventService:
                 detail="Only organizer can delete event"
             )
         
-        crud_event.delete(db, id=event_id)
+        # Delete the event - cascade will delete related tasks
+        db.delete(event)
+        db.commit()
 
 
 event_service = EventService()

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Eventure</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-content">
+            <h1>Eventure</h1>
+            <div class="nav-right">
+                <span id="userName"></span>
+                <button onclick="logout()" class="btn btn-secondary">Logout</button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="dashboard">
+        <!-- Events Section -->
+        <div class="section">
+            <div class="section-header">
+                <h2>My Events</h2>
+                <button onclick="showCreateEventModal()" class="btn btn-primary">+ Create Event</button>
+            </div>
+            <div id="eventsList" class="cards-grid"></div>
+        </div>
+
+        <!-- Tasks Section -->
+        <div class="section">
+            <div class="section-header">
+                <h2>My Tasks</h2>
+            </div>
+            <div id="tasksList" class="tasks-list"></div>
+        </div>
+    </div>
+
+    <!-- Create Event Modal -->
+    <div id="eventModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeEventModal()">&times;</span>
+            <h2>Create Event</h2>
+            <form id="createEventForm">
+                <div class="form-group">
+                    <label>Title</label>
+                    <input type="text" id="eventTitle" required>
+                </div>
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea id="eventDescription" rows="4"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Location</label>
+                    <input type="text" id="eventLocation">
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Start Time</label>
+                        <input type="datetime-local" id="eventStartTime" required>
+                    </div>
+                    <div class="form-group">
+                        <label>End Time</label>
+                        <input type="datetime-local" id="eventEndTime" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Status</label>
+                    <select id="eventStatus">
+                        <option value="planning">Planning</option>
+                        <option value="scheduled">Scheduled</option>
+                        <option value="ongoing">Ongoing</option>
+                        <option value="completed">Completed</option>
+                        <option value="cancelled">Cancelled</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Create Event</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- View Event Tasks Modal -->
+    <div id="viewTasksModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeViewTasksModal()">&times;</span>
+            <h2 id="viewTasksTitle">Event Tasks</h2>
+            <div id="viewTasksContainer"></div>
+        </div>
+    </div>
+
+    <!-- Create Task Modal -->
+    <div id="taskModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeTaskModal()">&times;</span>
+            <h2>Create Task</h2>
+            <form id="createTaskForm">
+                <input type="hidden" id="taskEventId">
+                <div class="form-group">
+                    <label>Title</label>
+                    <input type="text" id="taskTitle" required>
+                </div>
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea id="taskDescription" rows="3"></textarea>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Priority</label>
+                        <select id="taskPriority">
+                            <option value="low">Low</option>
+                            <option value="medium">Medium</option>
+                            <option value="high">High</option>
+                            <option value="urgent">Urgent</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Status</label>
+                        <select id="taskStatus">
+                            <option value="todo">To Do</option>
+                            <option value="in_progress">In Progress</option>
+                            <option value="completed">Completed</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Due Date</label>
+                    <input type="datetime-local" id="taskDueDate">
+                </div>
+                <button type="submit" class="btn btn-primary">Create Task</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="message" class="message"></div>
+
+    <script src="js/api.js"></script>
+    <script src="js/dashboard.js"></script>
+</body>
+</html>

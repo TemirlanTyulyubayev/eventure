@@ -19,7 +19,12 @@ class Settings(BaseSettings):
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 30
     REFRESH_TOKEN_EXPIRE_DAYS: int = 7
     
-    BACKEND_CORS_ORIGINS: list[str] = ["http://localhost:3000", "http://localhost:5173"]
+    BACKEND_CORS_ORIGINS: list[str] = [
+        "http://localhost:8000",
+        "http://0.0.0.0:8000",
+        "http://localhost:3000",
+        "http://localhost:5173"
+    ]
     
     model_config = SettingsConfigDict(
         env_file=str(ENV_FILE),  # Absolute path to .env
